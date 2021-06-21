@@ -1,0 +1,14 @@
+---
+pagination:
+  data: "books"
+  size: 4
+permalink: "books/{% if pagination.pageNumber != 0 %}{{ pagination.pageNumber | plus: 1 }}/{% endif %}"
+layout: layouts/base
+eleventyComputed:
+  title: "Books (page {{ pagination.pageNumber | plus: 1 }} of {{ pagination.pages.length }})"
+  tmpl: "layouts/{% if pagination.pageNumber == 0 %}featured{% else %}paginated{% endif %}_posts"
+---
+
+<!-- `render` requires LiquidJS@9 (via @11ty/eleventy v1 Canary) -->
+<!-- We're also using LiquidJS dynamic partials (see .eleventy.js) -->
+{% render tmpl for pagination.items as book %}
